@@ -231,7 +231,7 @@ fn extract_tests_from_string(s: &str, file_stem: &str) -> (Vec<Test>, Option<Str
                     if buf.is_empty() {
                         code_block_start = line_number;
                     }
-                    buf.push(text.into_owned());
+                    buf.extend(text.lines().map(|s| format!("{}\n", s)));
                 } else if let Buffer::Header(ref mut buf) = buffer {
                     buf.push_str(&*text);
                 }
